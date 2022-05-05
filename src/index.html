@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Document</title>
-</head>
-<body>
-  <header>
-    <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-    <h1 class="display-4">My Team</h1>
-  </div>
-  </header>
-  
-  
-  <div class="container">
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <div class="jumbotron jumbotron-fluid">
+                <h1 class="display-4 center">My Team</h1>
+            </div>
+        </header>
 
-
-  </div>
-  
-  </div>
-</body>
-</html>
+        <main>
+            <div class="container">
+                <div class="row justify-content-center" id="team-cards">
+                    <!--Team Cards-->
+                    ${employeeCards}
+                </div>
+            </div>
+        </main>
+    
+    
+    </body>
+    </html>

@@ -1,8 +1,10 @@
+
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+const generateHTML = require('./src/generatehtml');
 
-const Employee = require("./lib/Employee");
+//const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -68,7 +70,7 @@ const addManager = () => {
             console.log(newManager)
 
             Team.push(newManager)
-            // console.log(Team)
+            console.log(Team)
         })
 
 
@@ -97,6 +99,7 @@ const addEngineer = () => {
         const newEngineer = new Engineer (answers.name, answers.id, answers.email, answers.gitHubUsername);
 
         Team.push(newEngineer)
+        const newTeamMember = teamMember()
         //     console.log(newEngineer)
 
     })
@@ -126,22 +129,23 @@ const addIntern = () => {
             const newIntern = new Intern (answers.name, answers.id, answers.email, answers.school);
 
             Team.push(newIntern)
+            const newTeamMember = teamMember()
             // console.log(newIntern)
     
         })
 }
 
 const addTeamMember = () => {
-    console.log ('____ Adding a Team Member! ____')
+  console.log ('____ Adding a Team Member! ____')
 
     return inquirer.prompt([
         {
             type: 'list',
             name: 'role',
-            message: "choose employee's role",
-            choice: ['Engineer', 'Intern']
+            choices: ['Engineer', 'Intern']
         }
     ])
+
     .then(employeeType => {
         if(employeeType.role === 'Engineer') {
             const engineer = addEngineer();
@@ -168,8 +172,9 @@ const teamMember = () => {
     ])
     .then(answer => {
         console.log(answer)
+        console.log(Team)
         if(answer.choice === true) {
-            console.log ('True')
+            //const newTeamMember = new Employee(answer.choice)
             const newTeamMember = addTeamMember()
 
         }else {
@@ -177,11 +182,25 @@ const teamMember = () => {
         }
     })
     
+}
 
-
- }
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        // if there is an error 
+        if (err) {
+            console.log(err);
+            return;
+        // when the profile has been created 
+        } else {
+            console.log("Your team profile has been successfully created! Please check out the index.html")
+        }
+    })
+}; 
 
 addManager()
- //.then(addTeamMember)
- .then(teamMember)
+  .then(teamMember)
+  .then(Team => {
+      return generateHTML(Team)
+  })
+ 
 
